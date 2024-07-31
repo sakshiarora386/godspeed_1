@@ -1,0 +1,24 @@
+http.get./example: 
+  fn: example6.2
+
+  params:
+    - name: name
+      in: query
+      required: true
+      schema:
+        type: string
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            pswd: 
+              type: string    
+         
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: string

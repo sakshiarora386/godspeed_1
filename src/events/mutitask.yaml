@@ -1,0 +1,75 @@
+http.get./multitask:
+  fn: multitask
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - limit_type
+          additionalProperties: false
+          properties:
+            limit_type:
+              type: string
+              nullable: true
+            enabled:
+              type: boolean
+              nullable: true
+            kyc_type:
+              type: string
+              nullable: true
+            account_type:
+              minItems: 1
+              nullable: false
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+            transaction_type:
+              minItems: 1
+              nullable: false
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                properties:
+                  name:
+                    type: string
+                  duration:
+                    type: string
+                    enum:
+                     - Daily
+                     - Weekly
+                     - Monthly
+                     - Yearly
+                    nullable: true
+            dr_cr:
+              type: string
+              nullable: true
+            limit_value:
+              type: number
+              nullable: true
+            per_beneficiary:
+              type: boolean
+              nullable: true
+            aggregate_field:
+                type: string
+                nullable: true
+            aggregate_function:
+              type: string
+              enum:
+                - SUM
+                - COUNT
+              nullable: true
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object

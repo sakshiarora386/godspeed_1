@@ -1,0 +1,10 @@
+id: helloworld
+tasks:
+  - id: first_task
+    fn: com.gs.return
+    args: 
+      success: true 
+      code: 200
+      data:    
+        message:
+          <% "Hello World. This is " + inputs.query.name + " ."+ inputs.user.role %>

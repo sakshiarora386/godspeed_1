@@ -1,0 +1,42 @@
+http.get./business:
+  fn: business
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object       
+          required: [name , tsp]
+          additionalProperties: false
+          properties:
+            name:
+              type: string
+            address:
+              type: string
+              nullable: true
+            is_group:
+              type: boolean
+              default: false
+              nullable: true
+            parent_business:
+              type: string
+              nullable: true
+            tsp:
+              type: string
+            business_pan:
+              type: string
+              nullable: true
+            business_gst:
+              type: string
+              nullable: true
+          anyOf: 
+            - required: [business_pan]
+            - required: [business_gst]
+          
+            
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object

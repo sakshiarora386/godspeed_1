@@ -1,0 +1,21 @@
+http.get./date: 
+  fn: check_date
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            date: 
+              type: string
+              format: date
+              # pattern: "[0-9]{4}-[0-9]{2}-[0-9]{2}"
+         
+
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: string

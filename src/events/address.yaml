@@ -1,0 +1,26 @@
+http.get./address: 
+  fn: address
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            address: 
+              type: array 
+              items: 
+                type: string 
+                example: ["str1", "str2", "str3"]
+  responses:
+    200:
+          description: A JSON object containing street and city name
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  street:
+                    type: string
+                  city:
+                    type: string

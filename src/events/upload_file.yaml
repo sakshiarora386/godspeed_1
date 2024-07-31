@@ -1,0 +1,20 @@
+http.post./upload:
+  fn: upload_file
+  authn: false
+  body:
+    content:
+      multipart/form-data:
+        schema:
+          type: object
+          properties:
+            fileName:
+              type: string
+              format: binary
+
+
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object

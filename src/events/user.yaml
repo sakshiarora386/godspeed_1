@@ -1,0 +1,20 @@
+http.get./user: 
+  fn: user
+  authn: false
+  body:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username: 
+              type: string    
+         
+
+
+  responses:
+    200:
+      content:
+        application/json:
+          schema:
+            type: object
