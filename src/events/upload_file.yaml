@@ -10,8 +10,6 @@ http.post./upload:
             fileName:
               type: string
               format: binary
-
-
   responses:
     200:
       content:

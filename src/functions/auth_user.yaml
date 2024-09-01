@@ -1,4 +1,4 @@
-id: helloworld
+id: auth_user
 tasks:
   - id: first_task
     fn: com.gs.return
@@ -6,7 +6,7 @@ tasks:
       success: true 
       code: 200
       data:
-        message: <% "Hello World. User name is "+ inputs.query.name + " Role is "+ inputs.user.role %>
+        message: <% "Hello World. User name is "+ inputs.query.name + " Role is "+ inputs.auth_user.role %>
 
         # If I do authn: false at event level, then 
       #  yaml workflow return user role is undefined

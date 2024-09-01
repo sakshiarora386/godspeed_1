@@ -1,6 +1,6 @@
-http.get./helloworld:  
-  fn: helloworld
-  authz: false
+http.get./auth_user:  
+  fn: auth_user
+  
   params:
     - name: name
       in: query

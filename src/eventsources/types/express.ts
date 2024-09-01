@@ -24,9 +24,10 @@ async function enrich_user(req: any, res: any, next: any) {
             role: 'user'
         };
     }
-    req.user = user_obj;    
-    console.log('** Request is', req )     
-    console.log('** User role is', req.user )
+    // req.user = user_obj;      
+    req.auth_user = user_obj ;   
+    // console.log('** User role in request is', req.user )
+    console.log('** User role in request is', req.auth_user )
     next();
 }
 

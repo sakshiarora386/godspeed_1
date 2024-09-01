@@ -1,6 +1,31 @@
 type: express
-port: 3000
+port: 5000
 # base_url: /api/v1 #the base url of the http service
+
+authn:
+  jwt:                    #jwt settings to run by default on every event
+    secretOrKey: mysecret #the secret
+    audience: mycompany #aud in jwt token
+    issuer: mycompany #iss in jwt token
+
+# authorization policies to run by default on every event
+# Uncomment this to start checking user roles.
+# This will require jwt to be setup, or another middleware to setup the user information in inputs
+authz:
+  - id: get_auth_user
+    fn: com.gs.transform
+    args: <% inputs.auth_user.role === 'admin' %> 
+#   args: <% inputs.user.role === 'admin' %>  // it gives user role is undefined
+
+# validation error handling, to transform error responses
+on_request_validation_error: validations.request.standardResponseyml
+on_response_validation_error: validations.request.standardResponseyml
+  # - id: response_validation_error_handler
+  #   fn: com.gs.return
+  #   args: <%inputs.user.role%>
+
+request_body_limit: 20000 # maximum size of the request body (in bytes)
+file_size_limit: 50000 # How big a file can be uploaded (in bytes)
 
 #Bassic swagger setup
 docs:
@@ -23,33 +48,5 @@ docs:
     - url: 'http://localhost:3001'
       description: Internal API server
 
-request_body_limit: 20000 # maximum size of the request body (in bytes)
-file_size_limit: 50000 # How big a file can be uploaded (in bytes)
 
-#jwt settings to run by default on every event
-authn:
-  jwt:
-    secretOrKey: mysecret #the secret
-    audience: mycompany #aud in jwt token
-    issuer: mycompany #iss in jwt token
 
-# authorization policies to run by default on every event
-# Uncomment this to start checking user roles.
-# This will require jwt to be setup, or another middleware to setup the user information in inputs
-authz:
-  - id: get_user_role
-    fn: com.gs.transform
-    args: 
-      data:
-        message: <% "Request user has role = " +inputs.user.role %>
-
-  - id: check_user_role
-    fn: com.gs.transform
-    args: <% inputs.user.role === 'admin'%>
-
-# validation error handling, to transform error responses
-on_request_validation_error: validations.request.standardResponseyml
-on_response_validation_error:
-  - id: response_validation_error_handler
-    fn: com.gs.return
-    args: <%inputs.user.role%>
